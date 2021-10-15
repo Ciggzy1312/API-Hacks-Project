@@ -44,6 +44,10 @@ function App() {
     }
   }
 
+  const handleMarkerClick = (id, lat, long) => {
+    setCurrentPlaceId(id);
+    setViewport({ ...viewport, latitude: lat, longitude: long })
+  };
 
   useEffect(() => {
     const getPins = async () => {
@@ -66,8 +70,8 @@ function App() {
       title,
       desc,
       rating,
-      lat: parseInt(location.lat),
-      long: parseInt(location.long),
+      lat: parseFloat(location.lat),
+      long: parseFloat(location.long),
     }
 
     try {
@@ -99,12 +103,52 @@ function App() {
       //onDblClick={handleAddPlace}
       transitionDuration = '100'
       >
-        <Marker
-          latitude = {48}
-          longitude = {15}
-          offsetLeft={-3.5 * viewport.zoom}
-          offsetTop={-7 * viewport.zoom}
-        ><h1>Hello</h1></Marker>
+        {pins.map((p) => (
+          <>
+            <Marker
+              latitude={p.lat}
+              longitude={p.long}
+              offsetLeft={-3.5 * viewport.zoom}
+              offsetTop={-7 * viewport.zoom}
+            >
+              <Room
+                style={{
+                  fontSize: 7 * viewport.zoom,
+                  color: currentUsername === p.username ? "red" : "blue",
+                  cursor: "pointer",
+                }}
+                onClick={() => handleMarkerClick(p._id, p.lat, p.long)}
+              />
+            </Marker>
+            {p._id === currentPlaceId && (
+              <Popup
+                key={p._id}
+                latitude={p.lat}
+                longitude={p.long}
+                closeButton={true}
+                closeOnClick={false}
+                onClose={() => setCurrentPlaceId(null)}
+                anchor="left"
+              >
+                <div className="card">
+                  <label>Place</label>
+                  <h4 className="place">{p.title}</h4>
+                  <label>Review</label>
+                  <p className="desc">{p.desc}</p>
+                  <label>Rating</label>
+                  <div className="stars">
+                    {Array(parseInt(p.rating)).fill(<Star className="star" />)}
+                  </div>
+                  <label>Information</label>
+                  <span className="username">
+                    Created by <b>{p.username}</b>
+                  </span>
+                  <span className="date">{p.createdAt}</span>
+                </div>
+              </Popup>
+            )}
+            </>
+          ))}
       </ReactMapGL>
 
       <div className='sidebar'>
