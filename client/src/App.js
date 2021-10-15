@@ -20,7 +20,7 @@ function App() {
   })
 
   const [pins, setPins] = useState([])
-  const [currentPlaceId, setCurrentPlaceId] = useState(null);
+  const [currentPlaceId, setCurrentPlaceId] = useState('');
   const [currentUsername, setCurrentUsername] = useState('John')
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
@@ -50,11 +50,11 @@ function App() {
   };
 
   useEffect(() => {
+    getLocation()
     const getPins = async () => {
       try {
         const res = await axios.get("/pins");
         setPins(res.data)
-        console.log(res.data)
       } catch (err) {
         console.log(err);
       }
@@ -94,95 +94,90 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <ReactMapGL
-      className='mapbox'
-      {...viewport}
-      mapboxApiAccessToken = {process.env.REACT_APP_MAPBOX}
-      onViewportChange={nextViewport => setViewport(nextViewport)}
-      //onDblClick={handleAddPlace}
-      transitionDuration = '100'
-      >
-        {pins.map((p) => (
-          <>
-            <Marker
-              latitude={p.lat}
-              longitude={p.long}
-              offsetLeft={-3.5 * viewport.zoom}
-              offsetTop={-7 * viewport.zoom}
-            >
-              <Room
-                style={{
-                  fontSize: 7 * viewport.zoom,
-                  color: currentUsername === p.username ? "red" : "blue",
-                  cursor: "pointer",
-                }}
-                onClick={() => handleMarkerClick(p._id, p.lat, p.long)}
-              />
-            </Marker>
-            {p._id === currentPlaceId && (
-              <Popup
-                key={p._id}
+    <div className='App'>
+      <div className="section">
+        <ReactMapGL
+        className='mapbox'
+        {...viewport}
+        mapboxApiAccessToken = {process.env.REACT_APP_MAPBOX}
+        onViewportChange={nextViewport => setViewport(nextViewport)}
+        //onDblClick={handleAddPlace}
+        transitionDuration = '100'
+        >
+          {pins.map((p) => (
+            <>
+              <Marker
                 latitude={p.lat}
                 longitude={p.long}
-                closeButton={true}
-                closeOnClick={false}
-                onClose={() => setCurrentPlaceId(null)}
-                anchor="left"
+                offsetLeft={-3.5 * viewport.zoom}
+                offsetTop={-7 * viewport.zoom}
               >
-                <div className="card">
-                  <label>Place</label>
-                  <h4 className="place">{p.title}</h4>
-                  <label>Review</label>
-                  <p className="desc">{p.desc}</p>
-                  <label>Rating</label>
-                  <div className="stars">
-                    {Array(parseInt(p.rating)).fill(<Star className="star" />)}
+                <Room
+                  className = 'room'
+                  style={{
+                    fontSize: 7 * viewport.zoom,
+                    color: currentUsername === p.username ? "red" : "blue",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleMarkerClick(p._id, p.lat, p.long)}
+                />
+              </Marker>
+              {p._id === currentPlaceId && (
+                <Popup
+                  key={p._id}
+                  latitude={p.lat}
+                  longitude={p.long}
+                  closeButton={true}
+                  closeOnClick={false}
+                  onClose={() => setCurrentPlaceId(null)}
+                  anchor="left"
+                >
+                  <div className="card">
+                    <label>Place</label>
+                    <h4 className="place">{p.title}</h4>
+                    <label>Review</label>
+                    <p className="desc">{p.desc}</p>
+                    <label>Rating</label>
+                    <div className="stars">
+                      {Array(parseInt(p.rating)).fill(<Star className="star" />)}
+                    </div>
+                    <label>Information</label>
+                    <span className="username">
+                      Created by <b>{p.username}</b>
+                    </span>
+                    <span className="date">{p.createdAt}</span>
                   </div>
-                  <label>Information</label>
-                  <span className="username">
-                    Created by <b>{p.username}</b>
-                  </span>
-                  <span className="date">{p.createdAt}</span>
-                </div>
-              </Popup>
-            )}
-            </>
-          ))}
-      </ReactMapGL>
+                </Popup>
+              )}
+              </>
+            ))}
+        </ReactMapGL>
 
-      <div className='sidebar'>
-        <form className='sb-form' onSubmit={handleSubmit}>
-        <label>Title</label>
-            <input
-              value = {title}
-              placeholder="Enter a title"
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <label>Description</label>
-            <textarea
-              value = {desc}
-              placeholder="Say us something about this place."
-              onChange={(e) => setDesc(e.target.value)}
-            />
-            <label>Rating</label>
-            <select onChange={(e) => setRating(e.target.value)}>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-            <label>Latitude</label>
-            <input value={location.lat} />
-
-            <label>Longitude</label>
-            <input value={location.long} />
-          <button type="submit" className="submitButton">Add Pin</button>
-        </form>
-        <button onClick={getLocation}>Get Location</button>
-        {/*{location.lat && <p>Latitude: {location.lat}</p>}
-        {location.long && <p>Longitude: {location.long}</p>}*/}
+        <div className='sidebar'>
+          <form className='sb-form' onSubmit={handleSubmit}>
+          <label>Title</label>
+              <input
+                value = {title}
+                placeholder="Enter a title"
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <label>Description</label>
+              <textarea
+                value = {desc}
+                placeholder="Say us something about this place."
+                onChange={(e) => setDesc(e.target.value)}
+              />
+              <label>Rating</label>
+              <select onChange={(e) => setRating(e.target.value)}>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            <button type="submit" className="submitButton">Add Pin</button>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.section{
   display: flex;
 }
 
 .sidebar{
-  width: 30%;
+  width: 30vw;
+  padding: 25px 10px;
+  background-color: rgb(32, 32, 46);
+}
+
+.desc {
+  font-size: 14px;
+}
+
+.star {
+  color: gold;
+}
+
+.username {
+  font-size: 14px;
+}
+
+.date {
+  font-size: 12px;
+}
+
+form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+
+label {
+  color: rgb(131, 189, 255);
+  padding: 16px 0px;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+input {
+  border: none;
+  border-radius: 3px;
+}
+
+textarea::placeholder {
+  font-size: 12px;
+  color: rgb(52, 143, 204);
+}
+
+textarea{
+  border-radius: 3px;
+}
+
+select{
+  border-radius: 3px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+.room{
+  border: black;
+}
+
+.submitButton {
+  margin: 20px 0px;
+  border: none;
+  padding: 12px 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(42, 129, 228);
+  cursor: pointer;
 }
