@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.query{
+    background-color: rgb(3, 14, 36);
+    font-family: 'Poppins', sans-serif;
+    padding: 1.5rem;
+}
+
+.q-heading{
+    color: white;
+    text-align: center;
+}
+
+.q-sub{
+    display: grid;
+    grid-gap: 50px;
+    grid-template-columns: auto auto;
+    padding: 15px;
+}
+
+.q-card{
+    display: flex;
+    flex-direction: column;
+    /*width: 600px;*/
+    background-color: white;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.q-label{
+    padding: 10px 0px;
+    font-size: 1.5rem;
+    color: rgb(31, 106, 219)
+}
+
+.q-username{
+    padding: 10px 0px 0px 0px;
+    color: rgb(5, 47, 102);
+}
+
+.q-date{
+    color: rgb(5, 47, 102);
+}

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { Room, Star, StarBorder } from "@material-ui/icons";
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+import { format } from 'timeago.js'
 import './App.css';
 
 function App(props) {
@@ -114,7 +116,6 @@ function App(props) {
         {...viewport}
         mapboxApiAccessToken = {process.env.REACT_APP_MAPBOX}
         onViewportChange={nextViewport => setViewport(nextViewport)}
-        //onDblClick={handleAddPlace}
         transitionDuration = '300'
         >
           {pins.map((p) => (
@@ -125,6 +126,7 @@ function App(props) {
                 offsetLeft={-3.5 * viewport.zoom}
                 offsetTop={-7 * viewport.zoom}
               >
+                <Link to='/query'>
                 <Room
                   className = 'room'
                   style={{
@@ -135,7 +137,7 @@ function App(props) {
                   onMouseEnter={() => handleMarkerClick(p._id, p.lat, p.long)}
                   onMouseLeave={() => setShowPopup(false)}
                   onClick = {() => props.handleQuery(p.lat,p.long)}
-                />
+                /></Link>
               </Marker>
               {p._id === currentPlaceId && showPopup && (
                 <Popup
@@ -148,20 +150,20 @@ function App(props) {
                   onClose={() => setCurrentPlaceId(null)}
                   anchor="left"
                 >
-                  <div className="card">
+                  <div className="m-card">
                     <label>Place</label>
-                    <h4 className="place">{p.title}</h4>
+                    <h4 className="m-place">{p.title}</h4>
                     <label>Review</label>
-                    <p className="desc">{p.desc}</p>
+                    <p className="m-desc">{p.desc}</p>
                     <label>Rating</label>
-                    <div className="stars">
+                    <div className="m-stars">
                       {Array(parseInt(p.rating)).fill(<Star className="star" />)}
                     </div>
                     <label>Information</label>
-                    <span className="username">
+                    <span className="m-username">
                       Created by <b>{p.username}</b>
                     </span>
-                    <span className="date">{p.createdAt}</span>
+                    <span className="m-date">{format(p.createdAt)}</span>
                   </div>
                 </Popup>
               )}
@@ -171,18 +173,20 @@ function App(props) {
 
         <div className='sidebar'>
           <form className='sb-form' onSubmit={handleSubmit}>
-          <label>Title</label>
+          <label className='sb-label'>Title</label>
               <input
+                className='sb-input'
                 value = {title}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <label>Experience</label>
+              <label className='sb-label'>Experience</label>
               <textarea
+                className='sb-textarea'
                 value = {desc}
                 onChange={(e) => setDesc(e.target.value)}
               />
-              <label>Rating</label>
-              <select onChange={(e) => setRating(e.target.value)}>
+              <label className='sb-label'>Rating</label>
+              <select className='sb-select' onChange={(e) => setRating(e.target.value)}>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>

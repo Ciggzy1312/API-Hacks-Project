@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 body{
   margin: 0;
@@ -8,7 +8,7 @@ body{
 
 .App {
   text-align: center;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .section{
@@ -37,7 +37,7 @@ body{
   font-size: 12px;
 }
 
-form {
+.sb-form {
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -45,26 +45,26 @@ form {
   text-align: left;
 }
 
-label {
+.sb-label {
   color: rgb(131, 189, 255);
   padding: 16px 0px;
   font-size: 1.3rem;
   font-weight: 600;
 }
 
-input {
+.sb-input {
   border: none;
   border-radius: 3px;
   font-size: 1.2rem;
   padding: 3px;
 }
 
-textarea{
+.sb-textarea{
   border-radius: 3px;
   font-size: 1.2rem;
 }
 
-select{
+.sb-select{
   border-radius: 3px;
   font-size: 1.2rem;
 }
