@@ -2,7 +2,14 @@ import React, {useState} from 'react'
 import App from './components/App'
 import Login from './components/Login'
 import QueryPage from './components/QueryPage'
+import Home from './components/Home'
 import axios from 'axios'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 
 const Main = () => {
 
@@ -21,11 +28,24 @@ const Main = () => {
     }
 
     return (
-        <div>           
-            {/*<Login />*/}
-            <App handleQuery = {(lat,long)=>handleQuery(lat,long)}/>
-            <QueryPage query={query}/>
-        </div>
+        <Router>           
+            <div>
+                <Switch>
+                    {/*<Login />*/}
+                    <Route exact path='/'>
+                        <Home />
+                    </Route>
+
+                    <Route exact path='/maps'>
+                        <App handleQuery = {(lat,long)=>handleQuery(lat,long)}/>
+                    </Route>
+
+                    <Route exact path='/query'>
+                        <QueryPage query={query}/>
+                    </Route>
+                </Switch>
+            </div>
+        </Router>
     )
 }
 
