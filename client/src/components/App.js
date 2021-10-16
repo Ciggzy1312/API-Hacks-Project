@@ -26,6 +26,7 @@ function App() {
   const [desc, setDesc] = useState('');
   const [rating, setRating] = useState(1);
   const [status, setStatus] = useState('')
+  const [showPopup, setShowPopup] = useState(false)
   
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -46,7 +47,8 @@ function App() {
 
   const handleMarkerClick = (id, lat, long) => {
     setCurrentPlaceId(id);
-    setViewport({ ...viewport, latitude: lat, longitude: long })
+    //setViewport({ ...viewport, latitude: lat, longitude: long })
+    setShowPopup(true)
   };
 
   useEffect(() => {
@@ -93,6 +95,17 @@ function App() {
     }
   }
 
+  const handleQuery = async (lat,long)=>{
+      try {
+        const res = await axios.get(`/pins?lat=${lat}&long=${long}`);
+        //setPins(res.data)
+        //window.open(newPageUrl, "_blank")
+        console.log(res.data)
+      } catch (err) {
+        console.log(err);
+      }
+  }
+
   return (
     <div className='App'>
       <div className="section">
@@ -102,7 +115,7 @@ function App() {
         mapboxApiAccessToken = {process.env.REACT_APP_MAPBOX}
         onViewportChange={nextViewport => setViewport(nextViewport)}
         //onDblClick={handleAddPlace}
-        transitionDuration = '100'
+        transitionDuration = '300'
         >
           {pins.map((p) => (
             <>
@@ -119,10 +132,12 @@ function App() {
                     color: currentUsername === p.username ? "red" : "blue",
                     cursor: "pointer",
                   }}
-                  onClick={() => handleMarkerClick(p._id, p.lat, p.long)}
+                  onMouseEnter={() => handleMarkerClick(p._id, p.lat, p.long)}
+                  onMouseLeave={() => setShowPopup(false)}
+                  //onDoubleClick = {() => handleQuery(p.lat,p.long)}
                 />
               </Marker>
-              {p._id === currentPlaceId && (
+              {p._id === currentPlaceId && showPopup && (
                 <Popup
                   key={p._id}
                   latitude={p.lat}
@@ -158,13 +173,11 @@ function App() {
           <label>Title</label>
               <input
                 value = {title}
-                placeholder="Enter a title"
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <label>Description</label>
+              <label>Experience</label>
               <textarea
                 value = {desc}
-                placeholder="Say us something about this place."
                 onChange={(e) => setDesc(e.target.value)}
               />
               <label>Rating</label>

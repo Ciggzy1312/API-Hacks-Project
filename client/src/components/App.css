@@ -49,25 +49,34 @@ label {
   color: rgb(131, 189, 255);
   padding: 16px 0px;
   font-size: 1.3rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 input {
   border: none;
   border-radius: 3px;
-}
-
-textarea::placeholder {
-  font-size: 12px;
-  color: rgb(52, 143, 204);
+  font-size: 1.2rem;
+  padding: 3px;
 }
 
 textarea{
   border-radius: 3px;
+  font-size: 1.2rem;
 }
 
 select{
   border-radius: 3px;
+  font-size: 1.2rem;
+}
+
+textarea::placeholder {
+  font-size: 15px;
+  color: rgb(52, 143, 204);
+}
+
+input::placeholder{
+  font-size: 14px;
+  color: rgb(52, 143, 204);
 }
 
 input:focus,
