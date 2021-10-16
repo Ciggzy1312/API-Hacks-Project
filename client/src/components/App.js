@@ -4,7 +4,7 @@ import { Room, Star, StarBorder } from "@material-ui/icons";
 import axios from 'axios'
 import './App.css';
 
-function App() {
+function App(props) {
 
   const [viewport, setViewport] = useState({
     width: "70vw",
@@ -95,7 +95,7 @@ function App() {
     }
   }
 
-  const handleQuery = async (lat,long)=>{
+  {/*const handleQuery = async (lat,long)=>{
       try {
         const res = await axios.get(`/pins?lat=${lat}&long=${long}`);
         //setPins(res.data)
@@ -104,7 +104,7 @@ function App() {
       } catch (err) {
         console.log(err);
       }
-  }
+  }*/}
 
   return (
     <div className='App'>
@@ -134,11 +134,12 @@ function App() {
                   }}
                   onMouseEnter={() => handleMarkerClick(p._id, p.lat, p.long)}
                   onMouseLeave={() => setShowPopup(false)}
-                  //onDoubleClick = {() => handleQuery(p.lat,p.long)}
+                  onClick = {() => props.handleQuery(p.lat,p.long)}
                 />
               </Marker>
               {p._id === currentPlaceId && showPopup && (
                 <Popup
+                  className='popup'
                   key={p._id}
                   latitude={p.lat}
                   longitude={p.long}

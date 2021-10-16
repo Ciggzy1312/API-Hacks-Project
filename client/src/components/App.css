@@ -98,3 +98,8 @@ select:focus {
   background-color: rgb(42, 129, 228);
   cursor: pointer;
 }
+
+.popup{
+  text-align: left;
+  z-index: 1;
+}
