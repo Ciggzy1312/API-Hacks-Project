@@ -17,6 +17,6 @@ app.get('/', (req,res)=>{
 app.use("/api/users", userRoute)
 app.use("/api/pins", pinRoute)
 
-app.listen(8800,()=>{
+app.listen( process.env.PORT|| 5000,()=>{
     console.log("Server is running...")
 })
