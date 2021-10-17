@@ -43,5 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://git.heroku.com/tales-of-hacking.git/api"
+  "proxy": "https://tales-of-hacking.herokuapp.com//api"
 }
