@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 .home{
-    text-align: center;
     font-family: 'Poppins', sans-serif;
     background-color: rgb(3, 14, 36);
     color: white;
+    height: 750px;
+}
+
+.home-section{
+    text-align: center;
     padding-top: 7rem;
-    height: 100vh;
 }
 
 span{
@@ -47,4 +50,43 @@ span{
     border-radius: 2px;
     background-color: white;
     color: rgb(7, 43, 97);
+}
+
+.auth-btn{
+    text-align: right;
+}
+
+.register-btn{
+    margin: 15px 20px;
+    padding: 10px 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 2px;
+    background-color: white;
+    color: rgb(7, 43, 97);
+}
+
+.login-btn{
+    margin: 15px 20px;
+    padding: 10px 28px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    background-color: rgb(31, 106, 219);
+}
+
+.form-content{
+    margin: auto;
+    width: 600px;
+}
+
+.h-form{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.failure{
+    text-align: center;
 }

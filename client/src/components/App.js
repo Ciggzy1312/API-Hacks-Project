@@ -23,7 +23,7 @@ function App(props) {
 
   const [pins, setPins] = useState([])
   const [currentPlaceId, setCurrentPlaceId] = useState('');
-  const [currentUsername, setCurrentUsername] = useState('John')
+  const [currentUsername, setCurrentUsername] = useState(localStorage.getItem('user'))
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
   const [rating, setRating] = useState(1);
@@ -74,8 +74,8 @@ function App(props) {
       title,
       desc,
       rating,
-      lat: parseFloat(location.lat),
-      long: parseFloat(location.long),
+      lat: parseFloat(location.lat).toFixed(3),
+      long: parseFloat(location.long).toFixed(3),
     }
 
     try {
