@@ -100,6 +100,18 @@ select:focus {
 }
 
 .popup{
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   text-align: left;
   z-index: 1;
+}
+
+.m-card{
+  width: 300px;
+}
+
+.m-label{
+  font-size: 1.5rem;
 }

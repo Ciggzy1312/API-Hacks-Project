@@ -13,7 +13,7 @@ function App(props) {
     height: "100vh",
     latitude: 46,
     longitude: 12,
-    zoom: 4
+    zoom: 3
   });
 
   const [location, setLocation] = useState({
@@ -151,19 +151,18 @@ function App(props) {
                   anchor="left"
                 >
                   <div className="m-card">
-                    <label>Place</label>
+                    <label className='m-label'>Event</label>
                     <h4 className="m-place">{p.title}</h4>
-                    <label>Review</label>
-                    <p className="m-desc">{p.desc}</p>
-                    <label>Rating</label>
-                    <div className="m-stars">
-                      {Array(parseInt(p.rating)).fill(<Star className="star" />)}
-                    </div>
-                    <label>Information</label>
-                    <span className="m-username">
-                      Created by <b>{p.username}</b>
-                    </span>
-                    <span className="m-date">{format(p.createdAt)}</span>
+                    <label className='m-label'>Experience</label>
+                        <p className="m-desc">{p.desc}</p>
+                        <label className='m-label'>Rating</label>
+                        <div className="m-stars">
+                        {Array(parseInt(p.rating)).fill(<Star className="star" />)}
+                        </div>
+                        <h4 className="m-username">
+                        Created by {p.username}
+                        </h4>
+                        <h5 className="m-date">{format(p.createdAt)}</h5>
                   </div>
                 </Popup>
               )}
@@ -173,7 +172,7 @@ function App(props) {
 
         <div className='sidebar'>
           <form className='sb-form' onSubmit={handleSubmit}>
-          <label className='sb-label'>Title</label>
+          <label className='sb-label'>Event</label>
               <input
                 className='sb-input'
                 value = {title}
