@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import App from './components/App'
-import Login from './components/Login'
 import QueryPage from './components/QueryPage'
 import Home from './components/Home'
 import axios from 'axios'
@@ -8,7 +7,6 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
   } from "react-router-dom";
 
 const Main = () => {
@@ -31,7 +29,6 @@ const Main = () => {
         <Router>           
             <div>
                 <Switch>
-                    {/*<Login />*/}
                     <Route exact path='/'>
                         <Home />
                     </Route>

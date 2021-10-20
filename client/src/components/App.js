@@ -97,17 +97,6 @@ function App(props) {
     }
   }
 
-  {/*const handleQuery = async (lat,long)=>{
-      try {
-        const res = await axios.get(`/pins?lat=${lat}&long=${long}`);
-        //setPins(res.data)
-        //window.open(newPageUrl, "_blank")
-        console.log(res.data)
-      } catch (err) {
-        console.log(err);
-      }
-  }*/}
-
   return (
     <div className='App'>
       <div className="section">
